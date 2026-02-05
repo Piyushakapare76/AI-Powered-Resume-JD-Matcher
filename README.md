@@ -33,4 +33,134 @@ To build a tool that:
 - Ranking of multiple resumes based on score
 - Automatic name extraction from resume text
 
----
+## System Architecture
+
+User Input (Resume + JD)
+        ↓
+Text Preprocessing
+        ↓
+ Embedding Model
+        ↓
+Similarity Scoring (Cosine Similarity)
+        ↓
+Score Normalization (0–100)
+        ↓
+Explanation + Suggestions
+        ↓
+Ranking Storage 
+        ↓
+Web UI Display
+
+## Components:
+1) User Interface (Flask + HTML/CSS)
+
+Simple web interface
+
+Left panel: Resume and Job Description input
+
+Right panel: Match score, explanation, and suggestions
+
+Rankings displayed without clearing previous inputs
+
+No database used (in-memory storage)
+
+2) Text Processing Module
+
+Cleans and normalizes resume and job description text
+
+Extracts keywords and skill terms
+
+Automatically detects candidate name from resume text
+
+3) Embedding Engine (Offline)
+
+Converts resume and job description into numerical vectors
+
+Uses pre-trained sentence embeddings for semantic similarity
+
+Runs 100% offline after model download
+
+4) Matching & Scoring Logic
+
+Uses cosine similarity between resume and JD vectors
+
+Score normalized into percentage format (0–100%)
+
+Ensures higher scores for strong semantic matches
+
+5) Explanation & Recommendation Engine
+
+Identifies missing or weak skills
+
+Generates short justification like:
+
+“Strong backend development skills but limited cloud experience”
+
+Recommends keywords or skills to add to improve match
+
+6) Ranking Module
+
+Stores multiple resume scores in memory
+
+Displays rankings in descending order
+
+Automatically updates when a new resume is analyzed
+
+
+## AI Tools Used & Technical Decisions
+Sentence Transformers (Embedding Model)
+
+## Model Used:
+all-MiniLM-L6-v2
+
+## Why this model?
+
+Lightweight and fast
+
+Produces high-quality semantic embeddings
+
+Works very well for resume–JD similarity
+
+Fully usable offline after initial download
+
+No API key, billing, or rate limits required
+
+Why embeddings instead of keyword matching?
+
+Captures semantic meaning, not just exact words
+
+## Example:
+
+“Backend Developer” ≈ “Server-side Engineer”
+
+Much more accurate and realistic scoring
+
+## Prompt Engineering / RAG (Explanation)
+Prompt Engineering
+
+Instead of a generative LLM, the system uses semantic similarity
+
+Explanation and suggestions are derived from:
+
+Skill overlap
+
+Missing important JD keywords
+
+This ensures:
+
+Deterministic output
+ reliability
+
+No hallucinations
+
+## RAG (Retrieval-Augmented Generation)
+
+Light RAG-style logic is used:
+
+Resume text = document
+
+Job description = query
+
+Missing keywords = retrieval result
+
+Suggestions are generated based on retrieved missing skills
