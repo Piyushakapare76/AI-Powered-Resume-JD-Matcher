@@ -1,5 +1,5 @@
 # AI-Powered-Resume-JD-Matcher
-# AI-Powered Resume–Job Match Evaluation System
+
 
 An AI-driven application that evaluates a candidate’s resume against a job description and generates a **fit score with a concise explanation**.  
 The system is designed to help recruiters and hiring teams quickly assess candidate suitability using semantic understanding instead of keyword matching.
