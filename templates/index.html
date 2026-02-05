@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume JD Matcher</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Resume vs Job Description Matcher</h2>
+    <p class="subtitle">AI-powered resume screening</p>
+
+    <div class="grid">
+
+        <!-- LEFT SIDE -->
+        <div class="left-panel">
+            <form method="post">
+                <label>Resume</label>
+                <textarea name="resume" required>{{ resume }}</textarea>
+
+                <label>Job Description</label>
+                <textarea name="jd" required>{{ jd }}</textarea>
+
+                <div class="button-row">
+                    <button type="submit">Analyze Match</button>
+                    <a href="/" class="clear-btn">Clear</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-panel">
+            {% if score %}
+                <h3>Match Result</h3>
+                <div class="score">{{ "%.2f"|format(score) }}%</div>
+                <p class="result-text">{{ description }}</p>
+
+                {% if suggestions %}
+                    <h4>Suggestions to Improve</h4>
+                    <ul>
+                        {% for s in suggestions %}
+                            <li>Add: {{ s }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% else %}
+                <p class="placeholder">
+                    Submit resume and job description to view analysis.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if rankings %}
+    <div class="ranking-box">
+        <h3>Resume Rankings</h3>
+        <ol>
+            {% for r in rankings %}
+                <li>{{ r[0] }} — {{ "%.2f"|format(r[1]) }}%</li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
