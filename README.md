@@ -111,7 +111,7 @@ Automatically updates when a new resume is analyzed
 Sentence Transformers (Embedding Model)
 
 ## Model Used:
-all-MiniLM-L6-v2
+TF-IDF
 
 ## Why this model?
 
@@ -125,7 +125,7 @@ Fully usable offline after initial download
 
 No API key, billing, or rate limits required
 
-Why embeddings instead of keyword matching?
+## Why embeddings instead of keyword matching?
 
 Captures semantic meaning, not just exact words
 
