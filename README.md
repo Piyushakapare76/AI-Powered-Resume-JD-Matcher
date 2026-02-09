@@ -18,8 +18,6 @@ To build a tool that:
 ---
 
 ## Features
-
-### MVP Features
 - Resume input (text)
 - Job description input
 - AI-based semantic matching
