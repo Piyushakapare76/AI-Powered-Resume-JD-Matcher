@@ -72,7 +72,7 @@ Extracts keywords and skill terms
 
 Automatically detects candidate name from resume text
 
-3) Embedding Engine (Offline)
+3) Embedding Engine
 
 Converts resume and job description into numerical vectors
 
